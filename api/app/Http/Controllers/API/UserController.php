@@ -5,8 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Http\Requests\UserStoreRequest;
-
+use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index() { 
@@ -16,7 +15,7 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function store(UserStoreRequest $request) {
+    public function store(Request $request) {
 
         $this->validate($request, [
             'name' => 'required|max:100',
@@ -39,7 +38,7 @@ class UserController extends Controller
         return new UserResource($user);
      }
 
-    public function update(UserStoreRequest $request, User $user) {
+    public function update(Request $request, User $user) {
         $this->validate($request, [
             'name' => 'required|max:100',
             'email' => 'required|email',
